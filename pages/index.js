@@ -7,19 +7,33 @@ import { useState } from 'react'
 export default function Home() {
   const [link, setLink] = useState('');
   let uid = Math.random().toString(36).substr(2, 9);
+  function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
 
   const handleLinks = (e) => {
     e.preventDefault();
-    try {
-      axios.post("https://api.wepost.xyz/links", {
-        content: link,
-        uid: uid,
-      }).then((e) => {
-        console.log("Link sent!")
-        document.getElementById("copy").innerHTML = "Copy: " + window.location.href + uid;
-      })
-    } catch (error) {
-      console.log(error)
+    if(link != null && validURL(link)){
+      try {
+        axios.post("https://api.wepost.xyz/links", {
+          content: link,
+          uid: uid,
+        }).then((e) => {
+          console.log("Link sent!")
+          document.getElementById("copy").innerHTML = "Copy: " + window.location.href + uid;
+        })
+        document.getElementById("linkInput").value = "";
+      } catch (error) {
+        console.log(error)
+      }
+    }else{
+      alert("Must be a valid URL!");
     }
   }
 
@@ -43,7 +57,7 @@ export default function Home() {
           <Form>
             <label>Link:</label>
             <br />
-            <input className={styles.linkForm} type="text" onChange={(e) => setLink(e.target.value)} placeholder="https://www.example.com" />
+            <input id="linkInput" onInput={(e) => setLink(e.target.value)} className={styles.linkForm} type="text" placeholder="https://www.example.com" />
             <br />
             <br />
             <Button color="success" onClick={(e) => handleLinks(e)}>Shorten</Button>
