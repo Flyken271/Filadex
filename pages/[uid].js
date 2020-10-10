@@ -4,10 +4,22 @@ import Axios from 'axios';
 
 const Page = ({ uid, links }) => {
 
-    const handleRedirect = (link) => {
-        if(typeof window != "undefined"){
-            setTimeout(()=>{window.location.href = link.content }, 5000);
+  const timingTimer=(link)=>{
+    setInterval(()=>{
+      var timeleft = 5;
+      var downloadTimer = setInterval(function(){
+        if(timeleft <= -1){
+          clearInterval(downloadTimer);
+          if(typeof window != "undefined"){
+            window.location.href = link.content
+          } 
         }
+      if(typeof document != "undefined"){
+        document.getElementById("timer").innerHTML = timeleft;
+        }
+          timeleft -= 1;
+        }, 1000);
+      }, 1000)
     }
 
   return (
@@ -20,16 +32,16 @@ const Page = ({ uid, links }) => {
         <main className={styles.grid}>
             {links.map((link, index) => {
               return uid == link.uid ? (
-                  <div>
-                  {handleRedirect(link)}
-                  <h1>Redirecting to {link.content}...</h1>
+                  <div key={index}>
+                  {timingTimer(link)}
+                  <h1>Redirecting...</h1>
                   <br />
-                  <h4>Please wait for approx. 5 seconds.</h4>
+                  <h4 id="timer"></h4>
                   <br />
                   <h6>Want your ad here? <a href="mailto:jaredcollins99@gmail.com">contact me</a></h6>
                   </div>
               ) : (
-                <></>
+                <div key={index}></div>
               );
             })}
         </main>
