@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [link, setLink] = useState('');
-  let uid = Math.random().toString(36).substr(2, 9);
+  let uid = Math.random().toString(36).substr(2, 4);
   function validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
