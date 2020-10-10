@@ -17,7 +17,6 @@ const Page = ({ uid, links }) => {
           <title>Filadex - {uid}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        
         <main className={styles.grid}>
             {links.map((link, index) => {
               return uid == link.uid ? (
