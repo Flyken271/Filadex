@@ -104,7 +104,7 @@ export default function Home() {
           <Form>
             <label>File:</label>
             <br />
-            <input id="fileInput" onInput={(e) => setFile(e.target.files[0])} className={styles.linkForm} type="file"/>
+            <input id="fileInput" accept="image/*" onInput={(e) => setFile(e.target.files[0])} className={styles.linkForm} type="file"/>
             <br />
             <br />
             <Button color="success" onClick={(e) => handleFile(e)}>Upload</Button>
