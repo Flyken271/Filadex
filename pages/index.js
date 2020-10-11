@@ -102,7 +102,7 @@ export default function Home() {
           </Form>
 
           <Form>
-            <label>File:</label>
+            <label>Image:</label>
             <br />
             <input id="fileInput" accept="image/*" onInput={(e) => setFile(e.target.files[0])} className={styles.linkForm} type="file"/>
             <br />
