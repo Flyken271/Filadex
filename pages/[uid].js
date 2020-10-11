@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Axios from 'axios';
 
-const Page = ({ uid, links }) => {
+const Page = ({ uid, links, uploads }) => {
 
   const timingTimer=(link)=>{
     setInterval(()=>{
@@ -44,15 +44,23 @@ const Page = ({ uid, links }) => {
                 <div key={index}></div>
               );
             })}
+
+            {uploads.map((upload, index) => {
+              return uid == upload.uid ? (
+                  <div key={index}>
+                  <img style={{maxHeight: "720px"}, {maxWidth: "1280px"}} src={"https://api.wepost.xyz" + upload.content.url} />
+                  </div>
+              ) : (
+                <div key={index}></div>
+              );
+            })}
         </main>
 
         <footer className={styles.footer}>
           <a
-            href="https://flyken.org"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="https://flyken.xyz"
           >
-            Copyright - Flyken 2020
+            Homepage
           </a>
         </footer>
       </div>
@@ -64,11 +72,14 @@ export async function getServerSideProps({ params: { uid } }) {
   const response = await Axios.get(
     "https://api.wepost.xyz/links"
   );
+  const files = await Axios.get("https://api.wepost.xyz/file-uploads");
+  var uploads = files.data;
   var links = response.data;
   return {
     props: {
       uid,
       links,
+      uploads
     },
   };
 }

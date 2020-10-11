@@ -6,6 +6,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [link, setLink] = useState('');
+  const [file, setFile] = useState('');
   let uid = Math.random().toString(36).substr(2, 4);
   function validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
@@ -37,6 +38,40 @@ export default function Home() {
     }
   }
 
+  const handleFile = (e) => {
+    e.preventDefault();
+    if(file != null){
+      try {
+        axios.post('https://api.wepost.xyz/file-uploads', {
+          uid: uid,
+        }).then((response) => {
+          const formData = new FormData()
+          formData.append('files', file)
+          //formData.append('uid', uid);
+          formData.append('ref', response.data.id) // optional, you need it if you want to link the image to an entry
+          formData.append('field', 'content')
+
+          axios.post("https://api.wepost.xyz/upload", formData).then((e) => {
+          axios.put("https://api.wepost.xyz/file-uploads/"+response.data.id, {
+              content: e.data[0]
+            })
+            if(typeof window != "undefined"){
+              window.location.href = window.location.href + uid
+            }
+          }).catch((error) => {
+            console.log(error.response);
+          })
+        }).catch((error)=>{
+          console.log(error.response);
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }else{
+      alert("Must be a valid File!");
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -64,6 +99,17 @@ export default function Home() {
             <br />
             <br />
             <h4 id="copy"></h4>
+          </Form>
+
+          <Form>
+            <label>File:</label>
+            <br />
+            <input id="fileInput" onInput={(e) => setFile(e.target.files[0])} className={styles.linkForm} type="file"/>
+            <br />
+            <br />
+            <Button color="success" onClick={(e) => handleFile(e)}>Upload</Button>
+            <br />
+            <br />
           </Form>
         </div>
       </main>
