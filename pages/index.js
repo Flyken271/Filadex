@@ -104,9 +104,9 @@ export default function Home() {
         <Button color="info" href="/entries">
           Entries
         </Button>
-        <div className={styles.card}>
+        <div className={styles.cardd}>
           <Form>
-            <label>Link:</label>
+            <label>Link</label>
             <br />
             <input
               id="linkInput"
@@ -126,7 +126,7 @@ export default function Home() {
           </Form>
 
           <Form>
-            <label>Image:</label>
+            <label>Image</label>
             <br />
             <input
               id="fileInput"

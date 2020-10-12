@@ -19,7 +19,7 @@ const Entries = ({ links, uploads }) => {
                 <tr>
                   <th>#</th>
                   <th>URL</th>
-                  <th>Views</th>
+                  {links ? <th>Destination</th> : <th>Views</th>}
                 </tr>
               </thead>
               <tbody>
@@ -28,7 +28,7 @@ const Entries = ({ links, uploads }) => {
                     <tr>
                       <th scope="row">{index}</th>
                       <td>{"https://flyken.xyz/" + link.uid}</td>
-                      <td>N/A</td>
+                      <td className={styles.destLink}>{link.content}</td>
                     </tr>
                   );
                 })}
