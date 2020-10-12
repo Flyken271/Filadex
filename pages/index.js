@@ -101,8 +101,10 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>Get started by shortening links.</p>
-
-        <div className={styles.grid}>
+        <Button color="info" href="/entries">
+          Entries
+        </Button>
+        <div className={styles.card}>
           <Form>
             <label>Link:</label>
             <br />

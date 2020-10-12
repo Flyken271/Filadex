@@ -81,7 +81,7 @@
 }
 
 .linkForm {
-  width: 600px;
+  width: 500px;
 }
 
 .card {
@@ -93,6 +93,7 @@
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
+  width: 600px;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 
