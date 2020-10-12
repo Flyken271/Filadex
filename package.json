@@ -10,9 +10,11 @@
   "dependencies": {
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
+    "fs": "0.0.1-security",
     "next": "9.5.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "reactstrap": "^8.6.0"
+    "reactstrap": "^8.6.0",
+    "video.js": "^7.0.3"
   }
 }
