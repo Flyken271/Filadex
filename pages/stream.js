@@ -8,7 +8,7 @@ export default function Home() {
     controls: true,
     sources: [
       {
-        src: "http://98.237.41.63:8050/hls/flyken/index.m3u8",
+        src: "https://98.237.41.63:8050/hls/flyken/index.m3u8",
         type: "application/x-mpegurl",
       },
     ],
