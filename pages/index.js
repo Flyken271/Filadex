@@ -89,68 +89,97 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Filadex - Home</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
+      <Button className={styles.backButton} color="info" href="/entries">
+        Entries
+      </Button>
+      <div className={styles.container}>
+        <Head>
+          <title>Filadex - Home</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a>Filadex!</a>
-        </h1>
+        <main className={styles.main}>
+          <h1 className={styles.title}>
+            Welcome to <a>Filadex!</a>
+          </h1>
 
-        <p className={styles.description}>Get started by shortening links.</p>
-        <Button color="info" href="/entries">
-          Entries
-        </Button>
-        <div className={styles.cardd}>
-          <Form>
-            <label>Link</label>
-            <br />
-            <input
-              id="linkInput"
-              onInput={(e) => setLink(e.target.value)}
-              className={styles.linkForm}
-              type="text"
-              placeholder="https://www.example.com"
-            />
-            <br />
-            <br />
-            <Button color="success" onClick={(e) => handleLinks(e)}>
-              Shorten
-            </Button>
-            <br />
-            <br />
-            <h4 id="copy"></h4>
-          </Form>
+          <p className={styles.description}>Get started by shortening links.</p>
+          <div className={styles.cardd}>
+            <Form>
+              <label>Link</label>
+              <br />
+              <input
+                style={{ borderRadius: "5px" }}
+                id="linkInput"
+                onInput={(e) => setLink(e.target.value)}
+                className={styles.linkForm}
+                type="text"
+                placeholder="https://www.example.com"
+              />
+              <br />
+              <br />
+              <Button color="success" onClick={(e) => handleLinks(e)}>
+                Shorten
+              </Button>
+              <br />
+              <br />
+              <h4 id="copy"></h4>
+            </Form>
 
-          <Form>
-            <label>Image</label>
-            <br />
-            <input
-              id="fileInput"
-              accept="image/*"
-              onInput={(e) => setFile(e.target.files[0])}
-              className={styles.linkForm}
-              type="file"
-            />
-            <br />
-            <br />
-            <Button color="success" onClick={(e) => handleFile(e)}>
-              Upload
-            </Button>
-            <br />
-            <br />
-          </Form>
-        </div>
-      </main>
+            <Form>
+              <label>Image</label>
+              <br />
+              <Button
+                id="fileInputButton"
+                onClick={() => {
+                  return false;
+                }}
+                color="info"
+              >
+                <label
+                  id="fileInputLabel"
+                  className={styles.fileLabel}
+                  for="fileInput"
+                >
+                  Select File
+                </label>
+              </Button>
 
-      <footer className={styles.footer}>
-        <a href="https://flyken.org" target="_blank" rel="noopener noreferrer">
-          Copyright - Flyken 2020
-        </a>
-      </footer>
-    </div>
+              <input
+                onChange={(e) => {
+                  if (typeof document != "undefined") {
+                    document.getElementById("fileInputLabel").innerHTML =
+                      e.target.files[0].name;
+                  }
+                }}
+                className={styles.fileUpload}
+                id="fileInput"
+                accept="image/*"
+                onInput={(e) => setFile(e.target.files[0])}
+                type="file"
+              />
+              <br />
+              <br />
+              <Button color="warning" onClick={(e) => handleFile(e)}>
+                Upload
+              </Button>
+              <br />
+              <br />
+            </Form>
+          </div>
+        </main>
+
+        <footer className={styles.footer}>
+          <a
+            href="https://flyken.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Copyright - Flyken 2020
+          </a>
+        </footer>
+      </div>
+    </>
   );
 }

@@ -1,11 +1,22 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Axios from "axios";
-import { Table } from "reactstrap";
+import { useRouter } from "next/router";
+import { Table, Button } from "reactstrap";
 
 const Entries = ({ links, uploads }) => {
+  const router = useRouter();
   return (
     <>
+      <Button
+        className={styles.backButton}
+        color="danger"
+        onClick={() => {
+          router.back();
+        }}
+      >
+        Back
+      </Button>
       <div className={styles.container}>
         <Head>
           <title>Filadex - Entries</title>
@@ -14,7 +25,7 @@ const Entries = ({ links, uploads }) => {
         <main className={styles.grid}>
           <div className={styles.card}>
             <h1>Links</h1>
-            <Table bordered hover>
+            <Table className={styles.table1} bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -25,9 +36,15 @@ const Entries = ({ links, uploads }) => {
               <tbody>
                 {links.map((link, index) => {
                   return (
-                    <tr>
-                      <th scope="row">{index}</th>
-                      <td>{"https://flyken.xyz/" + link.uid}</td>
+                    <tr key={index}>
+                      <th className={styles.table} scope="row">
+                        {index}
+                      </th>
+                      <td className={styles.table}>
+                        <a href={"https://flyken.xyz/" + link.uid}>
+                          {"https://flyken.xyz/" + link.uid}
+                        </a>
+                      </td>
                       <td className={styles.destLink}>{link.content}</td>
                     </tr>
                   );
@@ -37,7 +54,7 @@ const Entries = ({ links, uploads }) => {
           </div>
           <div className={styles.card}>
             <h1>Images</h1>
-            <Table bordered hover>
+            <Table className={styles.table1} bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
@@ -49,9 +66,15 @@ const Entries = ({ links, uploads }) => {
                 {uploads.map((upload, index) => {
                   return (
                     <tr>
-                      <th scope="row">{index}</th>
-                      <td>{"https://flyken.xyz/" + upload.uid}</td>
-                      <td>{upload.view}</td>
+                      <th className={styles.table} scope="row">
+                        {index}
+                      </th>
+                      <td className={styles.table}>
+                        <a href={"https://flyken.xyz/" + upload.uid}>
+                          {"https://flyken.xyz/" + upload.uid}
+                        </a>
+                      </td>
+                      <td className={styles.table}>{upload.view}</td>
                     </tr>
                   );
                 })}
@@ -59,10 +82,6 @@ const Entries = ({ links, uploads }) => {
             </Table>
           </div>
         </main>
-
-        <footer className={styles.footer}>
-          <a href="https://flyken.xyz">Homepage</a>
-        </footer>
       </div>
     </>
   );

@@ -2,8 +2,11 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Axios from "axios";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { Button } from "reactstrap";
 
 const Page = ({ uid, links, uploads }) => {
+  const router = useRouter();
   useEffect(() => {
     Axios.get("https://api.wepost.xyz/file-uploads").then((res) => {
       res.data.map((entry, index) => {
@@ -38,6 +41,15 @@ const Page = ({ uid, links, uploads }) => {
 
   return (
     <>
+      <Button
+        className={styles.backButton}
+        color="danger"
+        onClick={() => {
+          router.back();
+        }}
+      >
+        Back
+      </Button>
       <div className={styles.container}>
         <Head>
           <title>Filadex - {uid}</title>
