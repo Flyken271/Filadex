@@ -55,10 +55,6 @@ const Page = ({ uid, links, uploads }) => {
           <title>Filadex - {uid}</title>
           <link rel="icon" href="/favicon.ico" />
           <meta property="og:type" content="website" />
-          <meta
-            property="og:image"
-            content={"https://api.wepost.xyz" + upload.content.url}
-          />
         </Head>
         <main className={styles.grid}>
           {links.map((link, index) => {
@@ -86,6 +82,10 @@ const Page = ({ uid, links, uploads }) => {
                   className={styles.imgCard}
                   style={{ maxHeight: "720px" }}
                   src={"https://api.wepost.xyz" + upload.content.url}
+                />
+                <meta
+                  property="og:image"
+                  content={"https://api.wepost.xyz" + upload.content.url}
                 />
               </div>
             ) : (
