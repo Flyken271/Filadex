@@ -87,6 +87,7 @@ const Page = ({ uid, links, uploads }) => {
                   property="og:image"
                   content={"https://api.wepost.xyz" + upload.content.url}
                 />
+                <meta name="twitter:card" content="summary_large_image"></meta>
               </div>
             ) : (
               <div key={index}></div>
