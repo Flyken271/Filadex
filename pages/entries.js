@@ -59,13 +59,14 @@ const Entries = ({ links, uploads }) => {
                 <tr>
                   <th>#</th>
                   <th>URL</th>
+                  <th>Preview</th>
                   <th>Views</th>
                 </tr>
               </thead>
               <tbody>
                 {uploads.map((upload, index) => {
                   return (
-                    <tr>
+                    <tr key={index}>
                       <th className={styles.table} scope="row">
                         {index}
                       </th>
@@ -73,6 +74,37 @@ const Entries = ({ links, uploads }) => {
                         <a href={"https://flyken.xyz/" + upload.uid}>
                           {"https://flyken.xyz/" + upload.uid}
                         </a>
+                      </td>
+                      <td
+                        onMouseEnter={() => {
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.width = "200px";
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.height = "200px";
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.transition = "all 1s";
+                        }}
+                        onMouseLeave={() => {
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.width = "30px";
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.height = "30px";
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.transition = "all 1s";
+                        }}
+                      >
+                        <img
+                          id={"uploadImage" + index}
+                          width="30px"
+                          height="30px"
+                          src={"https://api.wepost.xyz" + upload.content.url}
+                        />
                       </td>
                       <td className={styles.table}>{upload.view}</td>
                     </tr>
