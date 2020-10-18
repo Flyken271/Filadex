@@ -86,6 +86,12 @@ const Entries = ({ links, uploads }) => {
                           document.getElementById(
                             "uploadImage" + index
                           ).style.transition = "all 1s";
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.zIndex = "2";
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.position = "absolute";
                         }}
                         onMouseLeave={() => {
                           document.getElementById(
@@ -97,9 +103,16 @@ const Entries = ({ links, uploads }) => {
                           document.getElementById(
                             "uploadImage" + index
                           ).style.transition = "all 1s";
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.zIndex = "0";
+                          document.getElementById(
+                            "uploadImage" + index
+                          ).style.position = "absolute";
                         }}
                       >
                         <img
+                          className={styles.previewImage}
                           id={"uploadImage" + index}
                           width="30px"
                           height="30px"

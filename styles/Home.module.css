@@ -182,3 +182,7 @@
   border: 4px solid rgb(0, 0, 0);
   box-shadow: 4px 4px 4px rgb(20, 20, 20);
 }
+
+.previewImage {
+  object-fit: contain;
+}

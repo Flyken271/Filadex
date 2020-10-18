@@ -3,11 +3,27 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { Form, Button } from "reactstrap";
 import { useState } from "react";
+import { nanoid } from "nanoid";
 
 export default function Home() {
   const [link, setLink] = useState("");
   const [file, setFile] = useState("");
-  let uid = Math.random().toString(36).substr(2, 4);
+  //let uid = Math.random().toString(36).substr(2, 4);
+  let uid = nanoid(5);
+  axios.get("https://api.wepost.xyz/links").then((res) => {
+    res.data.map((entry, index) => {
+      if (entry.uid == uid) {
+        uid = nanoid(5);
+      }
+    });
+  });
+  axios.get("https://api.wepost.xyz/file-uploads").then((res) => {
+    res.data.map((entry, index) => {
+      if (entry.uid == uid) {
+        uid = nanoid(5);
+      }
+    });
+  });
   function validURL(str) {
     var pattern = new RegExp(
       "^(https?:\\/\\/)?" + // protocol
