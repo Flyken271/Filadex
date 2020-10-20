@@ -31,6 +31,7 @@ const Entries = ({ links, uploads }) => {
                   <th>#</th>
                   <th>URL</th>
                   {links ? <th>Destination</th> : <th>Views</th>}
+                  <th>User</th>
                 </tr>
               </thead>
               <tbody>
@@ -46,6 +47,7 @@ const Entries = ({ links, uploads }) => {
                         </a>
                       </td>
                       <td className={styles.destLink}>{link.content}</td>
+                      <td>{link.twitch}</td>
                     </tr>
                   );
                 })}
@@ -61,6 +63,7 @@ const Entries = ({ links, uploads }) => {
                   <th>URL</th>
                   <th>Preview</th>
                   <th>Views</th>
+                  <th>User</th>
                 </tr>
               </thead>
               <tbody>
@@ -120,6 +123,7 @@ const Entries = ({ links, uploads }) => {
                         />
                       </td>
                       <td className={styles.table}>{upload.view}</td>
+                      <td className={styles.table}>{upload.twitch}</td>
                     </tr>
                   );
                 })}

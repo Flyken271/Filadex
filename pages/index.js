@@ -4,10 +4,13 @@ import styles from "../styles/Home.module.css";
 import { Form, Button } from "reactstrap";
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { useAPI } from "./components/UserContextProvider";
 
 export default function Home() {
   const [link, setLink] = useState("");
   const [file, setFile] = useState("");
+  const { user } = useAPI();
+
   //let uid = Math.random().toString(36).substr(2, 4);
   let uid = nanoid(5);
   axios.get("https://api.wepost.xyz/links").then((res) => {
@@ -17,6 +20,7 @@ export default function Home() {
       }
     });
   });
+
   axios.get("https://api.wepost.xyz/file-uploads").then((res) => {
     res.data.map((entry, index) => {
       if (entry.uid == uid) {
@@ -45,6 +49,7 @@ export default function Home() {
           .post("https://api.wepost.xyz/links", {
             content: link,
             uid: uid,
+            twitch: user[0]?.display_name,
           })
           .then((e) => {
             console.log("Link sent!");
@@ -67,6 +72,7 @@ export default function Home() {
         axios
           .post("https://api.wepost.xyz/file-uploads", {
             uid: uid,
+            twitch: user[0]?.display_name,
           })
           .then((response) => {
             const formData = new FormData();
@@ -106,6 +112,7 @@ export default function Home() {
 
   return (
     <>
+      <img className={styles.profile} src={user[0]?.profile_image_url}></img>
       <Button className={styles.backButton} color="info" href="/entries">
         Entries
       </Button>
@@ -120,70 +127,85 @@ export default function Home() {
             Welcome to <a>Filadex!</a>
           </h1>
 
-          <p className={styles.description}>Get started by shortening links.</p>
-          <div className={styles.cardd}>
-            <Form>
-              <label>Link</label>
-              <br />
-              <input
-                style={{ borderRadius: "5px" }}
-                id="linkInput"
-                onInput={(e) => setLink(e.target.value)}
-                className={styles.linkForm}
-                type="text"
-                placeholder="https://www.example.com"
-              />
-              <br />
-              <br />
-              <Button color="success" onClick={(e) => handleLinks(e)}>
-                Shorten
-              </Button>
-              <br />
-              <br />
-              <h4 id="copy"></h4>
-            </Form>
+          {user[0] ? (
+            <>
+              <p className={styles.description}>
+                Get started by shortening links.
+              </p>
+              <div className={styles.cardd}>
+                <Form>
+                  <label>Link</label>
+                  <br />
+                  <input
+                    style={{ borderRadius: "5px" }}
+                    id="linkInput"
+                    onInput={(e) => setLink(e.target.value)}
+                    className={styles.linkForm}
+                    type="text"
+                    placeholder="https://www.example.com"
+                  />
+                  <br />
+                  <br />
+                  <Button color="success" onClick={(e) => handleLinks(e)}>
+                    Shorten
+                  </Button>
+                  <br />
+                  <br />
+                  <h4 id="copy"></h4>
+                </Form>
 
-            <Form>
-              <label>Image</label>
-              <br />
-              <Button
-                id="fileInputButton"
-                onClick={() => {
-                  return false;
-                }}
-                color="info"
-              >
-                <label
-                  id="fileInputLabel"
-                  className={styles.fileLabel}
-                  for="fileInput"
-                >
-                  Select File
-                </label>
-              </Button>
+                <Form>
+                  <label>Image</label>
+                  <br />
+                  <Button
+                    id="fileInputButton"
+                    onClick={() => {
+                      return false;
+                    }}
+                    color="info"
+                  >
+                    <label
+                      id="fileInputLabel"
+                      className={styles.fileLabel}
+                      for="fileInput"
+                    >
+                      Select File
+                    </label>
+                  </Button>
 
-              <input
-                onChange={(e) => {
-                  if (typeof document != "undefined") {
-                    document.getElementById("fileInputLabel").innerHTML =
-                      e.target.files[0].name;
-                  }
-                }}
-                className={styles.fileUpload}
-                id="fileInput"
-                accept="image/*"
-                onInput={(e) => setFile(e.target.files[0])}
-                type="file"
-              />
-              <br />
-              <br />
-              <Button color="warning" onClick={(e) => handleFile(e)}>
-                Upload
-              </Button>
-              <br />
-              <br />
-            </Form>
-          </div>
+                  <input
+                    onChange={(e) => {
+                      if (typeof document != "undefined") {
+                        document.getElementById("fileInputLabel").innerHTML =
+                          e.target.files[0].name;
+                      }
+                    }}
+                    className={styles.fileUpload}
+                    id="fileInput"
+                    accept="image/*"
+                    onInput={(e) => setFile(e.target.files[0])}
+                    type="file"
+                  />
+                  <br />
+                  <br />
+                  <Button color="warning" onClick={(e) => handleFile(e)}>
+                    Upload
+                  </Button>
+                  <br />
+                  <br />
+                </Form>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className={styles.description}>
+                Please log in with{" "}
+                <a href="https://id.twitch.tv/oauth2/authorize?client_id=d7izqp59w3dbk1itwt4axbr4dbku82&redirect_uri=http://localhost:3000/Twitch&response_type=token&scope=openid">
+                  Twitch
+                </a>
+              </p>
+            </>
+          )}
         </main>
 
         <footer className={styles.footer}>
