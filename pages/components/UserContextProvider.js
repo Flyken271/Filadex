@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 export const UserContext = createContext();
-const TWITCH_CLIENT_ID = "d7izqp59w3dbk1itwt4axbr4dbku82";
+const TWITCH_CLIENT_ID = "egh17kaqbk80czrnfmpt73shn5t81p";
 const UserContextProvider = (props) => {
   const [user, setUser] = useState({});
   const storeUser = (user) => {
@@ -24,7 +24,10 @@ const UserContextProvider = (props) => {
             },
           })
           .then((res) => {
-            storeUser(res.data.data);
+            storeUser(res.data.data[0]);
+          })
+          .catch((error) => {
+            console.log(error.response);
           });
       }
     } catch (error) {

@@ -1,8 +1,9 @@
 import axios from "axios";
 import Head from "next/head";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { Form, Button } from "reactstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { useAPI } from "./components/UserContextProvider";
 
@@ -49,7 +50,7 @@ export default function Home() {
           .post("https://api.wepost.xyz/links", {
             content: link,
             uid: uid,
-            twitch: user[0]?.display_name,
+            twitch: user?.display_name,
           })
           .then((e) => {
             console.log("Link sent!");
@@ -64,7 +65,6 @@ export default function Home() {
       alert("Must be a valid URL!");
     }
   };
-
   const handleFile = (e) => {
     e.preventDefault();
     if (file != null) {
@@ -72,7 +72,7 @@ export default function Home() {
         axios
           .post("https://api.wepost.xyz/file-uploads", {
             uid: uid,
-            twitch: user[0]?.display_name,
+            twitch: user?.display_name,
           })
           .then((response) => {
             const formData = new FormData();
@@ -112,7 +112,13 @@ export default function Home() {
 
   return (
     <>
-      <img className={styles.profile} src={user[0]?.profile_image_url}></img>
+      {user ? (
+        <Link href={"/u/" + user?.login}>
+          <img className={styles.profile} src={user?.profile_image_url} />
+        </Link>
+      ) : (
+        <div></div>
+      )}
       <Button className={styles.backButton} color="info" href="/entries">
         Entries
       </Button>
@@ -127,7 +133,7 @@ export default function Home() {
             Welcome to <a>Filadex!</a>
           </h1>
 
-          {user[0] ? (
+          {user ? (
             <>
               <p className={styles.description}>
                 Get started by shortening links.
@@ -142,7 +148,7 @@ export default function Home() {
                     onInput={(e) => setLink(e.target.value)}
                     className={styles.linkForm}
                     type="text"
-                    placeholder="https://www.example.com"
+                    placeholder=" https://www.example.com"
                   />
                   <br />
                   <br />
@@ -167,7 +173,7 @@ export default function Home() {
                     <label
                       id="fileInputLabel"
                       className={styles.fileLabel}
-                      for="fileInput"
+                      htmlFor="fileInput"
                     >
                       Select File
                     </label>
@@ -200,7 +206,7 @@ export default function Home() {
             <>
               <p className={styles.description}>
                 Please log in with{" "}
-                <a href="https://id.twitch.tv/oauth2/authorize?client_id=d7izqp59w3dbk1itwt4axbr4dbku82&redirect_uri=https://flyken.xyz/Twitch&response_type=token&scope=openid">
+                <a href="https://id.twitch.tv/oauth2/authorize?client_id=egh17kaqbk80czrnfmpt73shn5t81p&redirect_uri=http://localhost:3000/Twitch&response_type=token&scope=openid">
                   Twitch
                 </a>
               </p>

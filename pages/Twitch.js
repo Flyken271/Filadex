@@ -30,23 +30,13 @@ export default function Twitch() {
 
   return (
     <>
-      {user ? (
-        <img className={styles.profile} src={user[0]?.profile_image_url}></img>
-      ) : (
-        <Button
-          className={styles.backButton}
-          href="https://id.twitch.tv/oauth2/authorize?client_id=d7izqp59w3dbk1itwt4axbr4dbku82&redirect_uri=https://flyken.xyz/Twitch&response_type=token&scope=openid"
-        >
-          Log in with Twitch
-        </Button>
-      )}
       <div className={styles.container}>
         <Head>
           <title>Filadex - {user[0]?.display_name}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className={styles.main}>
-          <h1 className={styles.title}>Welcome, {user[0]?.display_name}</h1>
+          <h1 className={styles.title}>Redirecting...</h1>
           <br />
           {callRedirect()}
         </main>
