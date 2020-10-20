@@ -35,7 +35,7 @@ export default function Twitch() {
       ) : (
         <Button
           className={styles.backButton}
-          href="https://id.twitch.tv/oauth2/authorize?client_id=d7izqp59w3dbk1itwt4axbr4dbku82&redirect_uri=http://localhost:3000/Twitch&response_type=token&scope=openid"
+          href="https://id.twitch.tv/oauth2/authorize?client_id=d7izqp59w3dbk1itwt4axbr4dbku82&redirect_uri=https://flyken.xyz/Twitch&response_type=token&scope=openid"
         >
           Log in with Twitch
         </Button>
