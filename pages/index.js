@@ -112,7 +112,7 @@ export default function Home() {
 
   return (
     <>
-      {user ? (
+      {user?.id ? (
         <Link href={"/u/" + user?.login}>
           <img className={styles.profile} src={user?.profile_image_url} />
         </Link>
@@ -133,7 +133,7 @@ export default function Home() {
             Welcome to <a>Filadex!</a>
           </h1>
 
-          {user ? (
+          {user?.id ? (
             <>
               <p className={styles.description}>
                 Get started by shortening links.
@@ -206,7 +206,7 @@ export default function Home() {
             <>
               <p className={styles.description}>
                 Please log in with{" "}
-                <a href="https://id.twitch.tv/oauth2/authorize?client_id=egh17kaqbk80czrnfmpt73shn5t81p&redirect_uri=http://localhost:3000/Twitch&response_type=token&scope=openid">
+                <a href="https://id.twitch.tv/oauth2/authorize?client_id=egh17kaqbk80czrnfmpt73shn5t81p&redirect_uri=https://flyken.xyz/Twitch&response_type=token&scope=openid">
                   Twitch
                 </a>
               </p>
