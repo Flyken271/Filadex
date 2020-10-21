@@ -206,7 +206,10 @@ export default function Home() {
             <>
               <p className={styles.description}>
                 Please log in with{" "}
-                <a href="https://id.twitch.tv/oauth2/authorize?client_id=egh17kaqbk80czrnfmpt73shn5t81p&redirect_uri=https://flyken.xyz/Twitch&response_type=token&scope=openid">
+                <a
+                  className={styles.twitchLogin}
+                  href="https://id.twitch.tv/oauth2/authorize?client_id=egh17kaqbk80czrnfmpt73shn5t81p&redirect_uri=https://flyken.xyz/Twitch&response_type=token&scope=openid"
+                >
                   Twitch
                 </a>
               </p>
