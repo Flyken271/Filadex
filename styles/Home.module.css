@@ -92,7 +92,7 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 1000px;
-  margin-top: 3rem;
+  margin-top: 1rem;
 }
 
 .linkForm {
@@ -144,6 +144,32 @@
   border: 1px solid #0070f3;
   border-radius: 10px;
   width: 600px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.cardd:hover {
+  color: #dddddd;
+  border: 1px solid #dddddd;
+  cursor: pointer;
+}
+
+.carddd {
+  color: #0070f3;
+  margin: 0.5rem;
+  flex-basis: 45%;
+  padding: 1.5rem;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid #0070f3;
+  border-radius: 10px;
+  width: 300px;
+  max-width: 300px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.carddd:hover {
+  color: #dddddd;
+  border: 1px solid #dddddd;
+  cursor: pointer;
 }
 
 .card h3 {
@@ -202,4 +228,15 @@
   background-color: #6441a5;
   border-radius: 15px;
   padding: 2px 8px;
+}
+
+.videoTitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clipThumbnail {
+  max-width: 250px;
+  max-height: 150px;
 }
