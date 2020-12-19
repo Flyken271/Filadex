@@ -12,6 +12,14 @@
   margin: 20px;
 }
 
+.TableTwitch:hover {
+  color: #4cc0cf;
+  cursor: pointer;
+}
+.TableTwitch {
+  color: #4cc0cf;
+}
+
 .profile {
   float: right;
   margin: 20px;

@@ -64,7 +64,7 @@ const Page = ({ username, links, uploads }) => {
                             </a>
                           </td>
                           <td className={styles.destLink}>{link.content}</td>
-                          <td>{link.twitch}</td>
+                          <td className={styles.TableTwitch}>{link.twitch}</td>
                         </tr>
                       );
                   }
@@ -142,7 +142,7 @@ const Page = ({ username, links, uploads }) => {
                             />
                           </td>
                           <td className={styles.table}>{upload.view}</td>
-                          <td className={styles.table}>{upload.twitch}</td>
+                          <td  className={styles.TableTwitch}>{upload.twitch}</td>
                         </tr>
                       );
                   }

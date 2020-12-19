@@ -48,7 +48,7 @@ const Entries = ({ links, uploads }) => {
                         </a>
                       </td>
                       <td className={styles.destLink}>{link.content}</td>
-                      <Link href={"/u/" + link.twitch}><td>{link.twitch}</td></Link>
+                      <Link href={"/u/" + link.twitch}><td className={styles.TableTwitch}>{link.twitch}</td></Link>
                     </tr>
                   );
                 })}
@@ -124,7 +124,7 @@ const Entries = ({ links, uploads }) => {
                         />
                       </td>
                       <td className={styles.table}>{upload.view}</td>
-                      <Link href={"/u/" + upload.twitch}><td className={styles.table}>{upload.twitch}</td></Link>
+                      <Link href={"/u/" + upload.twitch}><td  className={styles.TableTwitch}>{upload.twitch}</td></Link>
                     </tr>
                   );
                 })}
