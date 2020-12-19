@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import Axios from "axios";
 import { useRouter } from "next/router";
@@ -47,7 +48,7 @@ const Entries = ({ links, uploads }) => {
                         </a>
                       </td>
                       <td className={styles.destLink}>{link.content}</td>
-                      <td>{link.twitch}</td>
+                      <Link href={"/u/" + link.twitch}><td>{link.twitch}</td></Link>
                     </tr>
                   );
                 })}
@@ -82,10 +83,10 @@ const Entries = ({ links, uploads }) => {
                         onMouseEnter={() => {
                           document.getElementById(
                             "uploadImage" + index
-                          ).style.width = "200px";
+                          ).style.width = "300px";
                           document.getElementById(
                             "uploadImage" + index
-                          ).style.height = "200px";
+                          ).style.height = "300px";
                           document.getElementById(
                             "uploadImage" + index
                           ).style.transition = "all 1s";
@@ -123,7 +124,7 @@ const Entries = ({ links, uploads }) => {
                         />
                       </td>
                       <td className={styles.table}>{upload.view}</td>
-                      <td className={styles.table}>{upload.twitch}</td>
+                      <Link href={"/u/" + upload.twitch}><td className={styles.table}>{upload.twitch}</td></Link>
                     </tr>
                   );
                 })}

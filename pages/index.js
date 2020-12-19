@@ -113,7 +113,7 @@ export default function Home() {
   return (
     <>
       {user?.id ? (
-        <Link href={"/u/" + user?.login}>
+        <Link href={"/u/" + user?.display_name}>
           <img className={styles.profile} src={user?.profile_image_url} />
         </Link>
       ) : (
